@@ -2,7 +2,8 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from csv_reader import read_csv
+from stations.csv_reader import read_csv
+from pagination.settings import BUS_STATION_CSV
 
 
 def index(request):
@@ -10,7 +11,7 @@ def index(request):
 
 
 def bus_stations(request):
-    stations_list = read_csv('data.csv')
+    stations_list = read_csv(BUS_STATION_CSV)
     page_number = request.GET.get('page', 1)
     element_per_page = 10
     paginator = Paginator(stations_list, element_per_page)
